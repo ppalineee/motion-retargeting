@@ -422,6 +422,38 @@
                 });
             }
 
+            function m_function(t) {
+                var p = parameters;
+
+                return { 
+                    body_position_y: 6+ Math.sin(t + p.bodyCycleOffset) * p.bodyYAmplitude, 
+                    body_rotation_x: .2 + Math.sin(t + p.bodyCycleOffset) * p.bodyRotationAmplitude, 
+                    torso_rotation_x: Math.sin(t + p.torsoCycleOffset ) * p.torsoRotationAmplitude,
+                    torso_position_y: 7 + Math.sin(t + p.torsoCycleOffset )*p.torsoYAmplitude,
+                    mouth_rotation_x: Math.PI/16 + Math.cos(t) * p.mouthRotationAmplitude,
+                    head_position_z: 2 + Math.sin(t + p.headCycleOffset) * p.headZAmplitude,
+                    head_position_y: 8 + Math.cos(t + p.headCycleOffset) * p.headYAmplitude,
+                    head_rotation_x: -.2 + Math.sin(t + p.headCycleOffset + PI*1.5) * p.headRotationAmplitude,
+                    earL_rotation_x: Math.cos(t + p.earLeftCycleOffset) * p.earLeftRotationAmplitude,
+                    eyeL_scale_y: p.eyeMinScale +  Math.abs( Math.cos(t*.5 + p.eyeCycleOffset)) * (p.eyeMaxScale - p.eyeMinScale),
+                    earR_rotation_x: Math.cos(t + p.earRightCycleOffset)*p.earRightRotationAmplitude,
+                    eyeR_scale_y: p.eyeMinScale +  Math.abs( Math.cos(t*.5 + p.eyeCycleOffset)) * (p.eyeMaxScale - p.eyeMinScale),
+                    tail_rotation_x: Math.cos(t + p.tailCycleOffset) * p.tailRotationAmplitude,
+                    pawFR_position_y: 1.5 + Math.sin(t + p.pawFRCycleOffset) * p.pawFRAmplitudeY,
+                    pawFR_position_z: 6 - Math.cos(t + p.pawFRCycleOffset) * p.pawFRAmplitudeZ,
+                    pawFR_rotation_x: Math.cos(t + p.pawFRCycleOffset ) * p.pawFRAnkleRotationAmplitude,
+                    pawFL_position_y: 1.5 + Math.sin(t + p.pawFLCycleOffset ) * p.pawFLAmplitudeY,
+                    pawFL_position_z: 6 - Math.cos(t + p.pawFLCycleOffset ) * p.pawFLAmplitudeZ,
+                    pawFL_rotation_x: Math.cos( t + p.pawFLCycleOffset ) * p.pawFLAnkleRotationAmplitude,
+                    pawBR_position_y: 1.5 + Math.sin( t + p.pawBRCycleOffset) * p.pawBRAmplitudeY,
+                    pawBR_position_z: - Math.cos( t + p.pawBRCycleOffset) * p.pawBRAmplitudeZ,
+                    pawBR_rotation_x: Math.cos(t + p.pawBRCycleOffset + PI *.25) * p.pawBRAnkleRotationAmplitude,
+                    pawBL_position_y: 1.5 + Math.sin(t + p.pawBLCycleOffset)*p.pawBLAmplitudeY,
+                    pawBL_position_z: - Math.cos(t + p.pawBLCycleOffset)*p.pawBLAmplitudeZ,
+                    pawBL_rotation_x: Math.cos(t + p.pawBLCycleOffset + PI *.25 ) * p.pawBLAnkleRotationAmplitude,
+                };
+            }
+
             Hero.prototype.run = function(){
                 var s = parameters.speed;
                 this.runningCycle += delta * s;
@@ -433,8 +465,6 @@
                 var p = parameters;
                 
                 // BODY
-
-                
                 this.body.position.y = 6+ Math.sin(t + p.bodyCycleOffset) * p.bodyYAmplitude;
                 this.body.rotation.x = .2 + Math.sin(t + p.bodyCycleOffset) * p.bodyRotationAmplitude;
                 
@@ -464,7 +494,6 @@
                 // TAIL
                 this.tail.rotation.x = Math.cos(t + p.tailCycleOffset) * p.tailRotationAmplitude;
                 
-                
                 // FRONT RIGHT PAW
                 this.pawFR.position.y = 1.5 + Math.sin(t + p.pawFRCycleOffset) * p.pawFRAmplitudeY;
                 this.pawFR.position.z = 6 - Math.cos(t + p.pawFRCycleOffset) * p.pawFRAmplitudeZ;
@@ -475,7 +504,6 @@
                 this.pawFL.position.y = 1.5 + Math.sin(t + p.pawFLCycleOffset ) * p.pawFLAmplitudeY;
                 this.pawFL.position.z = 6 - Math.cos(t + p.pawFLCycleOffset ) * p.pawFLAmplitudeZ;
                 this.pawFL.rotation.x = Math.cos( t + p.pawFLCycleOffset ) * p.pawFLAnkleRotationAmplitude;
-                
                 
                 // BACK RIGHT PAW
                 this.pawBR.position.y = 1.5 + Math.sin( t + p.pawBRCycleOffset) * p.pawBRAmplitudeY;
